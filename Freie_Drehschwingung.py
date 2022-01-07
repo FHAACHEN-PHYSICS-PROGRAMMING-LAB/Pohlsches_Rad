@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
 
-df=pd.read_csv("FreieDrehschwingung_02A_Gr27.csv",sep=';') #Datei einlesen (funktioniert auch mit.xslx , dann aber keinen Separator wählen), Separator für die Spalten wählen. Dieser muss in der .csv Datein identifiziert werden
+df=pd.read_csv("FreieDrehschwingung.csv",sep=';') #Datei einlesen (funktioniert auch mit.xslx , dann aber keinen Separator wählen), Separator für die Spalten wählen. Dieser muss in der .csv Datein identifiziert werden
 df = df.replace(',','.', regex=True) #Ersetze alle , durch .   regex=True bedeutet, bei allen Spalten ersetzen
 #df.iloc[:,0] = [float(str(i).replace(",", ".")) for i in df.iloc[:,0]]  #Separaator nur auf einzelne Spalten anwenden
 #df.iloc[:,3] = [float(str(i).replace(",", ".")) for i in df.iloc[:,3]]
@@ -54,11 +54,11 @@ ss_tot=np.sum((Amplitude -np.mean(Amplitude))**2) # Bestimmte die totale Quadrat
 R2=1-Res_square/ss_tot #Bestimmte das R^2
 
 #Ausgabe der Parameter mit Fehler in der Konsole
-print('Die Fitparameter für die Amplitude ist A0 = {} +- {}'.format(round(popt[0],2),round(np.sqrt(pcov[0][0]),2)))
-print('Die Fitparameter für die Resonanzfrequenz ist w0 = {} +- {}'.format(round(popt[1],3),round(np.sqrt(pcov[1][1]),3)))
-print('Die Fitparameter für die Dämpfung ist delta ={} +- {}'.format(round(popt[2],4),round(np.sqrt(pcov[2][2]),4)))
-print('Die Fitparameter für die Phasenverschiebung ist phi = {} +- {}'.format(round(popt[3],2),round(np.sqrt(pcov[3][3]),2)))
-print('Die Fitparameter für den Offset der Amplitude ist Offset = {} +- {}'.format(round(popt[4],2),round(np.sqrt(pcov[4][4]),2)))
+print('Die Fitparameter für die Amplitude ist A0 = ({} +- {}) rad'.format(round(popt[0],2),round(np.sqrt(pcov[0][0]),2)))
+print('Die Fitparameter für die Resonanzfrequenz ist w0 = ({} +- {}) rad/s'.format(round(popt[1],3),round(np.sqrt(pcov[1][1]),3)))
+print('Die Fitparameter für die Dämpfung ist delta =({} +- {}) 1/s'.format(round(popt[2],4),round(np.sqrt(pcov[2][2]),4)))
+print('Die Fitparameter für die Phasenverschiebung ist phi = ({} +- {}) rad'.format(round(popt[3],2),round(np.sqrt(pcov[3][3]),2)))
+print('Die Fitparameter für den Offset der Amplitude ist Offset = ({} +- {}) rad'.format(round(popt[4],2),round(np.sqrt(pcov[4][4]),2)))
 
 print('Das R^2 ist {}'.format(R2))  #Gebe das R^2 in der Konsole aus.
 
